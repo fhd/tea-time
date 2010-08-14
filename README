@@ -1,0 +1,16 @@
+Tea Time
+
+A tea timer for Java Mobile.
+
+REQUIREMENTS
+============
+- Sun Wireless Toolkit 2.5.2
+
+PACKAGING
+=========
+mvn compile
+WTK_HOME=/path/to/WTK2.5.2 mvn j2me:package
+
+RUNNING
+=======
+WTK_HOME=/path/to/WTK2.5.2 mvn j2me:run
