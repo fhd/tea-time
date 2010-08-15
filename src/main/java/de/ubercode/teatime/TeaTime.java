@@ -1,8 +1,8 @@
 package de.ubercode.teatime;
 
 import java.util.*;
-
 import javax.microedition.lcdui.*;
+import javax.microedition.lcdui.List;
 import javax.microedition.midlet.*;
 
 public class TeaTime extends MIDlet
