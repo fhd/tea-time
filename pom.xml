@@ -16,8 +16,8 @@
         </developer>
     </developers>
 	<scm>
-		<connection>git://github.com/fhd/teatime.git</connection>
-		<developerConnection>git@github.com:fhd/teatime.git</developerConnection>
+		<connection>scm:git:git://github.com/fhd/teatime.git</connection>
+		<developerConnection>scm:git:git@github.com:fhd/teatime.git</developerConnection>
 		<url>http://github.com/fhd/teatime</url>
 	</scm>
     <properties>
