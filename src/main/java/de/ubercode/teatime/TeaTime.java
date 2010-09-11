@@ -9,36 +9,36 @@ import javax.microedition.midlet.*;
  * The main class, responsible for user interface and logic.
  */
 public class TeaTime extends MIDlet {
-	private static final Command START_COMMAND = new Command("Start",
+    private static final Command START_COMMAND = new Command("Start",
                                                              Command.SCREEN, 0);
-	private static final Command BACK_COMMAND = new Command("Back",
+    private static final Command BACK_COMMAND = new Command("Back",
                                                             Command.BACK, 1);
-	private static final Command EDIT_COMMAND = new Command("Edit tea list",
+    private static final Command EDIT_COMMAND = new Command("Edit tea list",
                                                             Command.SCREEN, 1);
-	private static final Command EXIT_COMMAND = new Command("Exit",
+    private static final Command EXIT_COMMAND = new Command("Exit",
                                                             Command.EXIT, 2);
-	private static final Tea CUSTOM_TEA = new Tea("Custom tea", 0);
+    private static final Tea CUSTOM_TEA = new Tea("Custom tea", 0);
 
-	private Display display;
-	private List teaList;
-	private Tea selectedTea;
-	private Form customTeaForm;
-	private TextField brewingTimeSecondsField;
-	private TextField brewingTimeMinutesField;
-	private Form teaTimerForm;
-	private StringItem teaTimerTea;
-	private Timer timer;
+    private Display display;
+    private List teaList;
+    private Tea selectedTea;
+    private Form customTeaForm;
+    private TextField brewingTimeSecondsField;
+    private TextField brewingTimeMinutesField;
+    private Form teaTimerForm;
+    private StringItem teaTimerTea;
+    private Timer timer;
 
-	protected void startApp() throws MIDletStateChangeException {
-		final Vector teas = new Vector();
-		teas.addElement(CUSTOM_TEA);
-		// TODO: Don't hard code the teas, make the list editable.
-		teas.addElement(new Tea("Green tea", 120));
-		teas.addElement(new Tea("Black tea", 120));
-		teas.addElement(new Tea("Herbal tea", 300));
-		teas.addElement(new Tea("Fruit tea", 300));
+    protected void startApp() throws MIDletStateChangeException {
+        final Vector teas = new Vector();
+        teas.addElement(CUSTOM_TEA);
+        // TODO: Don't hard code the teas, make the list editable.
+        teas.addElement(new Tea("Green tea", 120));
+        teas.addElement(new Tea("Black tea", 120));
+        teas.addElement(new Tea("Herbal tea", 300));
+        teas.addElement(new Tea("Fruit tea", 300));
 
-		CommandListener cl = new CommandListener() {
+        CommandListener cl = new CommandListener() {
                 public void commandAction(Command c, Displayable d) {
                     Displayable currentDisplay = display.getCurrent();
                     String label = c.getLabel();
@@ -49,7 +49,7 @@ public class TeaTime extends MIDlet {
                     }
 
                     if (teaList.equals(currentDisplay)
-						&& (c == List.SELECT_COMMAND
+                        && (c == List.SELECT_COMMAND
                             || START_COMMAND.getLabel().equals(label))) {
                         String teaLabel =
                             teaList.getString(teaList.getSelectedIndex());
@@ -71,10 +71,10 @@ public class TeaTime extends MIDlet {
                     if (START_COMMAND.getLabel().equals(label)) {
                         if (customTeaForm.equals(currentDisplay)) {
                             int brewingTimeSeconds =
-								stringToInt(brewingTimeSecondsField
+                                stringToInt(brewingTimeSecondsField
                                             .getString());
                             int brewingTimeMinutes =
-								stringToInt(brewingTimeMinutesField
+                                stringToInt(brewingTimeMinutesField
                                             .getString());
                             selectedTea = new Tea(CUSTOM_TEA.getName(),
                                                   brewingTimeSeconds
@@ -95,54 +95,54 @@ public class TeaTime extends MIDlet {
                 }
             };
 
-		teaList = new List("Tea", List.IMPLICIT);
-		for (int i = 0; i < teas.size(); i++)
-			teaList.append(((Tea) teas.elementAt(i)).toString(), null);
-		teaList.addCommand(START_COMMAND);
-		teaList.addCommand(EDIT_COMMAND);
-		teaList.addCommand(EXIT_COMMAND);
-		teaList.setCommandListener(cl);
+        teaList = new List("Tea", List.IMPLICIT);
+        for (int i = 0; i < teas.size(); i++)
+            teaList.append(((Tea) teas.elementAt(i)).toString(), null);
+        teaList.addCommand(START_COMMAND);
+        teaList.addCommand(EDIT_COMMAND);
+        teaList.addCommand(EXIT_COMMAND);
+        teaList.setCommandListener(cl);
 
-		customTeaForm = new Form("Custom tea");
-		customTeaForm.append("Brewing time:");
-		brewingTimeSecondsField = new TextField("Seconds", "", 5,
-                                             TextField.NUMERIC);
-		customTeaForm.append(brewingTimeSecondsField);
-		brewingTimeMinutesField = new TextField("Minutes", "", 5,
-                                             TextField.NUMERIC);
-		customTeaForm.append(brewingTimeMinutesField);
-		customTeaForm.addCommand(START_COMMAND);
-		customTeaForm.addCommand(BACK_COMMAND);
-		customTeaForm.addCommand(EXIT_COMMAND);
-		customTeaForm.setCommandListener(cl);
+        customTeaForm = new Form("Custom tea");
+        customTeaForm.append("Brewing time:");
+        brewingTimeSecondsField = new TextField("Seconds", "", 5,
+                                                TextField.NUMERIC);
+        customTeaForm.append(brewingTimeSecondsField);
+        brewingTimeMinutesField = new TextField("Minutes", "", 5,
+                                                TextField.NUMERIC);
+        customTeaForm.append(brewingTimeMinutesField);
+        customTeaForm.addCommand(START_COMMAND);
+        customTeaForm.addCommand(BACK_COMMAND);
+        customTeaForm.addCommand(EXIT_COMMAND);
+        customTeaForm.setCommandListener(cl);
 
-		teaTimerForm = new Form("Waiting for tea time ...");
-		teaTimerTea = new StringItem("", "");
-		teaTimerForm.append(teaTimerTea);
-		teaTimerForm.addCommand(BACK_COMMAND);
-		teaTimerForm.addCommand(EXIT_COMMAND);
-		teaTimerForm.setCommandListener(cl);
+        teaTimerForm = new Form("Waiting for tea time ...");
+        teaTimerTea = new StringItem("", "");
+        teaTimerForm.append(teaTimerTea);
+        teaTimerForm.addCommand(BACK_COMMAND);
+        teaTimerForm.addCommand(EXIT_COMMAND);
+        teaTimerForm.setCommandListener(cl);
 
-		display = Display.getDisplay(this);
-		display.setCurrent(teaList);
-	}
+        display = Display.getDisplay(this);
+        display.setCurrent(teaList);
+    }
 
-	private int stringToInt(String s) {
-		try {
-			return Integer.parseInt(s);
-		} catch (Exception e) {
-			return 0;
-		}
-	}
+    private int stringToInt(String s) {
+        try {
+            return Integer.parseInt(s);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
 
-	private void startTeaTimer() {	
-		teaTimerTea.setLabel(selectedTea.getName());
-		teaTimerTea.setText(" " + String.valueOf(selectedTea.getBrewingTime())
+    private void startTeaTimer() {    
+        teaTimerTea.setLabel(selectedTea.getName());
+        teaTimerTea.setText(" " + String.valueOf(selectedTea.getBrewingTime())
                             + " seconds");
-		display.setCurrent(teaTimerForm);
+        display.setCurrent(teaTimerForm);
 
-		timer = new Timer();
-		timer.scheduleAtFixedRate(new TimerTask() {
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
                 private int secondsLeft = selectedTea.getBrewingTime();
 
                 public void run() {
@@ -167,15 +167,15 @@ public class TeaTime extends MIDlet {
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
                         }
-                    }				
+                    }                
                 }
             }, 1000, 1000);
-	}
+    }
 
-	protected void pauseApp() {
-	}
+    protected void pauseApp() {
+    }
 
     protected void destroyApp(boolean unconditional)
         throws MIDletStateChangeException {
-	}
+    }
 }
