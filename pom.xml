@@ -15,6 +15,11 @@
             <url>http://ubercode.de</url>
         </developer>
     </developers>
+	<scm>
+		<connection>git://github.com/fhd/teatime.git</connection>
+		<developerConnection>git@github.com:fhd/teatime.git</developerConnection>
+		<url>http://github.com/fhd/teatime</url>
+	</scm>
     <properties>
         <me2Version>2.0.3</me2Version>
         <wtk.home>${env.WTK_HOME}</wtk.home>
