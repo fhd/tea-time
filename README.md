@@ -8,11 +8,15 @@ Building
 
 To build Tea Time, you will need the [Sun Wireless Toolkit
 2.5.2](http://www.oracle.com/technetwork/java/index-jsp-137162.html).
-Install it and set the `WTK_HOME` environment variable:
+Install it and set the `WTK_HOME` environment variable, e.g.:
 
-	set WTK_HOME=/path/to/WTK2.5.2
+	export WTK_HOME=/path/to/WTK2.5.2
 
 You will also need [Apache Maven](http://maven.apache.org/).
+
+First compile the source code:
+
+	mvn compile
 
 To create a package that can be installed on mobile phones, execute:
 

@@ -5,6 +5,9 @@ import javax.microedition.lcdui.*;
 import javax.microedition.lcdui.List;
 import javax.microedition.midlet.*;
 
+/**
+ * The main class, responsible for user interface and logic.
+ */
 public class TeaTime extends MIDlet {
 	private static final Command START_COMMAND = new Command("Start",
                                                              Command.SCREEN, 0);
@@ -20,8 +23,8 @@ public class TeaTime extends MIDlet {
 	private List teaList;
 	private Tea selectedTea;
 	private Form customTeaForm;
-	private TextField drawTimeSecondsField;
-	private TextField drawTimeMinutesField;
+	private TextField brewingTimeSecondsField;
+	private TextField brewingTimeMinutesField;
 	private Form teaTimerForm;
 	private StringItem teaTimerTea;
 	private Timer timer;
@@ -29,7 +32,7 @@ public class TeaTime extends MIDlet {
 	protected void startApp() throws MIDletStateChangeException {
 		final Vector teas = new Vector();
 		teas.addElement(CUSTOM_TEA);
-		// TODO: Don't hardcode the teas, make the list editable.
+		// TODO: Don't hard code the teas, make the list editable.
 		teas.addElement(new Tea("Green tea", 120));
 		teas.addElement(new Tea("Black tea", 120));
 		teas.addElement(new Tea("Herbal tea", 300));
@@ -50,12 +53,12 @@ public class TeaTime extends MIDlet {
                             || START_COMMAND.getLabel().equals(label))) {
                         String teaLabel =
                             teaList.getString(teaList.getSelectedIndex());
-                        if (CUSTOM_TEA.getLabel().equals(teaLabel))
+                        if (CUSTOM_TEA.toString().equals(teaLabel))
                             display.setCurrent(customTeaForm);
                         else {
                             for (int i = 0; i < teas.size(); i++) {
                                 Tea tea = (Tea) teas.elementAt(i);
-                                if (teaLabel.equals(tea.getLabel())) {
+                                if (teaLabel.equals(tea.toString())) {
                                     selectedTea = tea;
                                     break;
                                 }
@@ -67,13 +70,15 @@ public class TeaTime extends MIDlet {
 
                     if (START_COMMAND.getLabel().equals(label)) {
                         if (customTeaForm.equals(currentDisplay)) {
-                            int drawTimeSeconds =
-								stringToInt(drawTimeSecondsField.getString());
-                            int drawTimeMinutes =
-								stringToInt(drawTimeMinutesField.getString());
-                            TeaTime.this.selectedTea =
-                                new Tea(CUSTOM_TEA.getName(),
-                                        drawTimeSeconds + drawTimeMinutes * 60);
+                            int brewingTimeSeconds =
+								stringToInt(brewingTimeSecondsField
+                                            .getString());
+                            int brewingTimeMinutes =
+								stringToInt(brewingTimeMinutesField
+                                            .getString());
+                            selectedTea = new Tea(CUSTOM_TEA.getName(),
+                                                  brewingTimeSeconds
+                                                  + brewingTimeMinutes * 60);
                         }
                         startTeaTimer();
                     } else if (BACK_COMMAND.getLabel().equals(label)) {
@@ -90,36 +95,36 @@ public class TeaTime extends MIDlet {
                 }
             };
 
-		this.teaList = new List("Tea", List.IMPLICIT);
+		teaList = new List("Tea", List.IMPLICIT);
 		for (int i = 0; i < teas.size(); i++)
-			this.teaList.append(((Tea) teas.elementAt(i)).getLabel(), null);
-		this.teaList.addCommand(START_COMMAND);
-		this.teaList.addCommand(EDIT_COMMAND);
-		this.teaList.addCommand(EXIT_COMMAND);
-		this.teaList.setCommandListener(cl);
+			teaList.append(((Tea) teas.elementAt(i)).toString(), null);
+		teaList.addCommand(START_COMMAND);
+		teaList.addCommand(EDIT_COMMAND);
+		teaList.addCommand(EXIT_COMMAND);
+		teaList.setCommandListener(cl);
 
-		this.customTeaForm = new Form("Custom tea");
-		this.customTeaForm.append("Draw time:");
-		this.drawTimeSecondsField = new TextField("Seconds", "", 5,
-                                                  TextField.NUMERIC);
-		this.customTeaForm.append(this.drawTimeSecondsField);
-		this.drawTimeMinutesField = new TextField("Minutes", "", 5,
-                                                  TextField.NUMERIC);
-		this.customTeaForm.append(this.drawTimeMinutesField);
-		this.customTeaForm.addCommand(START_COMMAND);
-		this.customTeaForm.addCommand(BACK_COMMAND);
-		this.customTeaForm.addCommand(EXIT_COMMAND);
-		this.customTeaForm.setCommandListener(cl);
+		customTeaForm = new Form("Custom tea");
+		customTeaForm.append("Brewing time:");
+		brewingTimeSecondsField = new TextField("Seconds", "", 5,
+                                             TextField.NUMERIC);
+		customTeaForm.append(brewingTimeSecondsField);
+		brewingTimeMinutesField = new TextField("Minutes", "", 5,
+                                             TextField.NUMERIC);
+		customTeaForm.append(brewingTimeMinutesField);
+		customTeaForm.addCommand(START_COMMAND);
+		customTeaForm.addCommand(BACK_COMMAND);
+		customTeaForm.addCommand(EXIT_COMMAND);
+		customTeaForm.setCommandListener(cl);
 
-		this.teaTimerForm = new Form("Waiting for tea time ...");
-		this.teaTimerTea = new StringItem("", "");
-		this.teaTimerForm.append(this.teaTimerTea);
-		this.teaTimerForm.addCommand(BACK_COMMAND);
-		this.teaTimerForm.addCommand(EXIT_COMMAND);
-		this.teaTimerForm.setCommandListener(cl);
+		teaTimerForm = new Form("Waiting for tea time ...");
+		teaTimerTea = new StringItem("", "");
+		teaTimerForm.append(teaTimerTea);
+		teaTimerForm.addCommand(BACK_COMMAND);
+		teaTimerForm.addCommand(EXIT_COMMAND);
+		teaTimerForm.setCommandListener(cl);
 
-		this.display = Display.getDisplay(this);
-		this.display.setCurrent(teaList);
+		display = Display.getDisplay(this);
+		display.setCurrent(teaList);
 	}
 
 	private int stringToInt(String s) {
@@ -131,15 +136,14 @@ public class TeaTime extends MIDlet {
 	}
 
 	private void startTeaTimer() {	
-		this.teaTimerTea.setLabel(selectedTea.getName());
-		this.teaTimerTea.setText(" "
-                                 + String.valueOf(selectedTea.getDrawTime())
-                                 + " seconds");
-		this.display.setCurrent(this.teaTimerForm);
+		teaTimerTea.setLabel(selectedTea.getName());
+		teaTimerTea.setText(" " + String.valueOf(selectedTea.getBrewingTime())
+                            + " seconds");
+		display.setCurrent(teaTimerForm);
 
-		this.timer = new Timer();
-		this.timer.scheduleAtFixedRate(new TimerTask() {
-                private int secondsLeft = selectedTea.getDrawTime();
+		timer = new Timer();
+		timer.scheduleAtFixedRate(new TimerTask() {
+                private int secondsLeft = selectedTea.getBrewingTime();
 
                 public void run() {
                     teaTimerTea.setText(" " + --secondsLeft + " seconds");
@@ -155,15 +159,13 @@ public class TeaTime extends MIDlet {
                                 }
                             });
                         display.setCurrent(alert);
-                        // TODO: Do something for phones without vibration
-                        //       support.
                         try {
+                            // TODO: Play a sound as well.
                             display.vibrate(1000);
                             Thread.sleep(2000);
                             display.vibrate(1000);
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
-                            // TODO: Exception handling
                         }
                     }				
                 }

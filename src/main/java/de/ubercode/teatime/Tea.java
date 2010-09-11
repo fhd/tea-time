@@ -1,35 +1,38 @@
 package de.ubercode.teatime;
 
+/**
+ * A type of tea.
+ */
 public class Tea {
 	private String name;
-	private int drawTime;
+	private int brewingTime;
 
-	public Tea() {
-	}
-
-	public Tea(String name, int drawTime) {
+    /**
+     * Creates a new type of tea.
+     * @param The name of this tea.
+     * @param The time required for brewing this tea.
+     */
+	public Tea(String name, int brewingTime) {
 		this.name = name;
-		this.drawTime = drawTime;
+		this.brewingTime = brewingTime;
 	}
 
+    /**
+     * @return The name of this tea.
+     */
 	public String getName()	{
-		return this.name;
+		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+    /**
+     * @return The time required for brewing this tea.
+     */
+	public int getBrewingTime() {
+		return brewingTime;
 	}
 
-	public int getDrawTime() {
-		return this.drawTime;
-	}
-
-	public void setDrawTime(int drawTime) {
-		this.drawTime = drawTime;
-	}
-
-	public String getLabel() {
-		return this.name + ((this.drawTime > 0)
-                            ? " [" + String.valueOf(this.drawTime) + "s]" : "");
+	public String toString() {
+		return name + ((brewingTime > 0)
+                       ? " [" + String.valueOf(brewingTime) + "s]" : "");
 	}
 }
