@@ -32,7 +32,6 @@ public class TeaTime extends MIDlet {
     protected void startApp() throws MIDletStateChangeException {
         final Vector teas = new Vector();
         teas.addElement(CUSTOM_TEA);
-        // TODO: Don't hard code the teas, make the list editable.
         teas.addElement(new Tea("Green tea", 120));
         teas.addElement(new Tea("Black tea", 120));
         teas.addElement(new Tea("Herbal tea", 300));
@@ -149,7 +148,7 @@ public class TeaTime extends MIDlet {
                     teaTimerTea.setText(" " + --secondsLeft + " seconds");
                     if (secondsLeft <= 0) {
                         timer.cancel();
-                        Alert alert = new Alert("Tea time", "The tea is ready.",
+                        Alert alert = new Alert("Tea time", "It's tea time!",
                                                 null, AlertType.INFO);
                         alert.setTimeout(Alert.FOREVER);
                         alert.setCommandListener(new CommandListener() {
@@ -160,7 +159,6 @@ public class TeaTime extends MIDlet {
                             });
                         display.setCurrent(alert);
                         try {
-                            // TODO: Play a sound as well.
                             display.vibrate(1000);
                             Thread.sleep(2000);
                             display.vibrate(1000);
