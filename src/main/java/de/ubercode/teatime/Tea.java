@@ -20,7 +20,7 @@ public class Tea {
     /**
      * @return The name of this tea.
      */
-    public String getName()	{
+    public String getName() {
         return name;
     }
 
