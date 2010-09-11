@@ -19,20 +19,11 @@
     <properties>
         <me2Version>2.0.3</me2Version>
         <wtk.home>${env.WTK_HOME}</wtk.home>
-        <j2me.midlet.vendor>Felix H. Dahlke &lt;fhd@ubercode.de&gt;</j2me.midlet.vendor>
         <j2me.midlet.name>${project.name}</j2me.midlet.name>
-        <j2me.midlet.version>1.0.0-SNAPSHOT</j2me.midlet.version>
+        <j2me.midlet.vendor>Felix H. Dahlke &lt;fhd@ubercode.de&gt;</j2me.midlet.vendor>
         <j2me.midlet.configuration>CLDC-1.1</j2me.midlet.configuration>
         <j2me.midlet.profile>MIDP-2.0</j2me.midlet.profile>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.microemu</groupId>
-            <artifactId>microemulator</artifactId>
-            <version>${me2Version}</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
     <build>
         <defaultGoal>install</defaultGoal>
         <plugins>
@@ -42,16 +33,9 @@
                     <source>1.3</source>
                     <target>1.1</target>
                     <compilerArguments>
-                        <bootclasspath>${settings.localRepository}/org/microemu/cldcapi11/${me2Version}/cldcapi11-${me2Version}.jar${path.separator}${settings.localRepository}/org/microemu/midpapi20/${me2Version}/midpapi20-${me2Version}.jar</bootclasspath>
+						<bootclasspath>${env.WTK_HOME}/lib/cldcapi10.jar${path.separator}${env.WTK_HOME}/lib/midpapi20.jar</bootclasspath>
                     </compilerArguments>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.microemu</groupId>
-                        <artifactId>midpapi20</artifactId>
-                        <version>${me2Version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
             <plugin>
                 <groupId>com.pyx4me</groupId>
@@ -65,55 +49,17 @@
                 </executions>
                 <configuration>
                     <wtkHome>${env.WTK_HOME}</wtkHome>
-                    <proguardInclude>proguard.conf</proguardInclude>
-                    <proguard>true</proguard>
-                    <obfuscate>true</obfuscate>
-                    <jadAttributes>
-
-                        <MIDlet-Vendor>${j2me.midlet.vendor}</MIDlet-Vendor>
-                        <Created-By>${j2me.midlet.vendor}</Created-By>
-                        <MIDlet-Permissions>javax.microedition.io.Connector.http</MIDlet-Permissions>
-                    </jadAttributes>
+                    <proguard>false</proguard>
+                    <obfuscate>false</obfuscate>
                     <midlets>
                         <MIDlet>
                             <name>Tea Time</name>
+
                             <icon>/teatime.png</icon>
                             <class>de.ubercode.teatime.TeaTime</class>
                         </MIDlet>
                     </midlets>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.pyx4me</groupId>
-                <artifactId>obex-maven-plugin</artifactId>
-                <configuration>
-                    <jarfile>teatime-1.0.0-SNAPSHOT-me.jar</jarfile>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>site</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <tasks>
-                                <copy overwrite="true"
-                                      file="${project.build.directory}/${project.build.finalName}-me.jar"
-                                      tofile="${project.build.directory}/site/teatime.jar"/>
-                                <copy overwrite="true"
-                                      file="${project.build.directory}/${project.build.finalName}-me.jad"
-                                      tofile="${project.build.directory}/site/teatime.jad"/>
-                                <replace value="teatime.jar" token="${project.build.finalName}-me.jar"
-                                         dir="${project.build.directory}/site">
-                                    <include name="teatime.jad"></include>
-                                </replace>
-                            </tasks>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
