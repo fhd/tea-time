@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.ubercode.teatime</groupId>
     <artifactId>teatime</artifactId>
@@ -19,10 +22,6 @@
         <url>http://github.com/fhd/teatime</url>
     </scm>
     <properties>
-        <me2Version>2.0.3</me2Version>
-        <wtk.home>${env.WTK_HOME}</wtk.home>
-        <j2me.midlet.name>${project.name}</j2me.midlet.name>
-        <j2me.midlet.version>${project.version}</j2me.midlet.version>
         <j2me.midlet.vendor>Felix H. Dahlke &lt;fhd@ubercode.de&gt;</j2me.midlet.vendor>
         <j2me.midlet.configuration>CLDC-1.1</j2me.midlet.configuration>
         <j2me.midlet.profile>MIDP-2.0</j2me.midlet.profile>
