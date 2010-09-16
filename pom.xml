@@ -5,8 +5,8 @@
                              http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.fhd.teatime</groupId>
-    <artifactId>teatime</artifactId>
-    <version>1.1.0-SNAPSHOT</version>
+    <artifactId>tea-time</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Tea Time</name>
     <description>A tea timer for JavaME enabled mobile phones.</description>
