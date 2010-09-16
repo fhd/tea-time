@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
     <name>Tea Time</name>
     <description>A tea timer for JavaME enabled mobile phones.</description>
-    <url>http://github.com/fhd/teatime</url>
+    <url>http://github.com/fhd/tea-time</url>
     <licenses>
         <license>
             <name>GNU General Public License 2.0</name>
@@ -19,9 +19,9 @@
         </license>
     </licenses> 
     <scm>
-        <connection>scm:git:git://github.com/fhd/teatime.git</connection>
-        <developerConnection>scm:git:git@github.com:fhd/teatime.git</developerConnection>
-        <url>http://github.com/fhd/teatime</url>
+        <connection>scm:git:git://github.com/fhd/tea-time.git</connection>
+        <developerConnection>scm:git:git@github.com:fhd/tea-time.git</developerConnection>
+        <url>http://github.com/fhd/tea-time</url>
     </scm>
     <developers>
         <developer>
@@ -65,7 +65,7 @@
                     <midlets>
                         <MIDlet>
                             <name>Tea Time</name>
-                            <icon>/teatime.png</icon>
+                            <icon>/tea-time.png</icon>
                             <class>com.github.fhd.teatime.TeaTime</class>
                         </MIDlet>
                     </midlets>
