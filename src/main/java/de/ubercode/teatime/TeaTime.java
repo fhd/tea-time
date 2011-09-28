@@ -1,4 +1,4 @@
-package com.github.fhd.teatime;
+package de.ubercode.teatime;
 
 import java.util.*;
 import javax.microedition.lcdui.*;

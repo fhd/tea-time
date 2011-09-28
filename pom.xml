@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.github.fhd.teatime</groupId>
+    <groupId>de.ubercode.teatime</groupId>
     <artifactId>tea-time</artifactId>
     <version>1.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -66,7 +66,7 @@
                         <MIDlet>
                             <name>Tea Time</name>
                             <icon>/tea-time.png</icon>
-                            <class>com.github.fhd.teatime.TeaTime</class>
+                            <class>de.ubercode.teatime.TeaTime</class>
                         </MIDlet>
                     </midlets>
                 </configuration>

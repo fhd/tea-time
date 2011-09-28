@@ -1,4 +1,4 @@
-package com.github.fhd.teatime;
+package de.ubercode.teatime;
 
 /**
  * A type of tea.
