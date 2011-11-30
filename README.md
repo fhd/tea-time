@@ -3,8 +3,6 @@ Tea Time
 
 A tea timer for JavaME enabled mobile phones.
 
-[![Flattr this](http://api.flattr.com/button/button-compact-static-100x17.png "Flattr this")](http://flattr.com/thing/63918/Tea-Time)
-
 Building
 --------
 
